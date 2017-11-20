@@ -46,17 +46,17 @@
                     </a>
                     <p>Rating {{review.stars}}</p>
                     <p>
-                        <a href="#">
+                        <a href="/users/{{review.rater.id}}">
                             <span>{{review.rater.alias}}</span>
                         </a> says: {{review.review}}</p>
                     <p>Posted on {{review.created_at}}</p><br>
                     {% endfor %} {% endif %}
                 </div>
                 <div class="col-sm-4" style="background-color:rgb(228, 192, 209);">
-                    <h4>Recent Book Reviews : </h4>
+                    <h4>Other Books with Reviews : </h4>
                     <div class="right">
                         {% if reviews %} {% for review in reviews %}
-                        <a href="#">
+                        <a href="/books/{{review.reviewed_book.id}}">
                             <span>{{review.reviewed_book.title}}</span>
                         </a>
                         <br> {% endfor %} {% endif %}

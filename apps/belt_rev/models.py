@@ -19,12 +19,12 @@ class UserManager(models.Manager):
             errors['email'] =  "Please try another email id"
         else:    
             if postdata['name'] == "" :
-                errors['name'] = "Please enter Firstname"
+                errors['name'] = "Please enter Name"
             else:            
                 if len(postdata['name']) < 2:
                     errors["name"] = "Name should not be fewer than 2 characters"
                 if not NAME_REGEX.match(postdata['name']):
-                    errors['name'] = "Numeric characters are not allowed in Firstname"
+                    errors['name'] = "Numeric characters are not allowed in Name"
             
             if postdata['alias'] == "":
                 errors['alias'] = "Please enter Alias"
@@ -32,7 +32,7 @@ class UserManager(models.Manager):
                 if len(postdata['alias']) < 2:
                     errors["alias"] = "alias Name should not be fewer than 2 characters"
                 if not NAME_REGEX.match(postdata['alias']):
-                    errors['alias'] = "Numeric characters are not allowed in Lastname"
+                    errors['alias'] = "Numeric characters are not allowed in alias"
 
             if postdata['email'] == "":
                 errors['email'] = "Please enter Email Id"
@@ -64,7 +64,7 @@ class UserManager(models.Manager):
 
     def validate_login(self, postdata):
         errors = {}
-        if postdata['username'] == "" and postdata['pwd'] == "":
+        if postdata['username'] == "" or postdata['pwd'] == "":
             errors['username'] = "Please enter email and password"        
         else:
             user = User.objects.filter(email_id=postdata['username'])
@@ -72,9 +72,10 @@ class UserManager(models.Manager):
                 hash1 = user[0].password
                 if bcrypt.checkpw(postdata['pwd'].encode(), hash1.encode()):
                     return (True, user)
-            else:
-                errors['username'] = "Please verify username or password"
-                return (False, errors)
+                else:
+                    print "else loop"
+                    errors['username'] = "Please verify username or password"
+                    return (False, errors)
         return (False, errors)
 
     
@@ -96,7 +97,7 @@ class UserManager(models.Manager):
             else:
                 author_name = postdata['new_author']
                 print author_name
-            author = Author.objects.filter(name = author)            
+            author = Author.objects.filter(name = author_name)            
             user = User.objects.get(id= id)           
             if len(author) == 0:
                 author = Author.objects.create(name=author_name)

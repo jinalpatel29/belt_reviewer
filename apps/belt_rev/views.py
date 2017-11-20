@@ -21,7 +21,7 @@ def login(req):
         return redirect('/books')
     else:
         for result in results[1]:
-            messages.error(req, results[result])
+            messages.error(req, results[1][result])
         return redirect('/')
 
 def register(req):
