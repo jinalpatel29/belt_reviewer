@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Welcome !</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    {%load static%}
+    <link rel="stylesheet" href="{% static "belt_rev/style.css "%}">
+</head>
+
+<body>
+    <h1>Login and Registration</h1>
+    <div class="container">
+        <div class="msg">
+            {% if messages %}        
+                {% for message in messages %}   
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}                     
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}   
+                        </div>
+
+                 {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                 <div class="alert alert-success" role="alert">
+                        {{ message }}   
+                    </div>
+                {% endif %}
+                {% endfor %}
+            {% endif %}
+            </div>
+        <div class="register">
+            <form action="/register" method="post">
+                <h3> Registration </h3>
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="name">First Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="name" placeholder="Enter First Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="name">Alias:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="alias" placeholder="Enter Alias Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="pwd">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email" placeholder="Please enter email here">
+                    </div>
+                </div>                        
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="pwd">Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="pwd" placeholder="Please enter password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="pwd">Confirm pw:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="cpwd" placeholder="Please confirm your password">
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+        <div class="login">
+            <form action="/login" method="post">
+                <h3> Login </h3>
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="name">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="username" placeholder="Enter Username/Email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-2" for="pwd">Password:</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="pwd" placeholder="Please enter password">
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">  -->
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'belt_rev/style.css' %}">
+</head>
+
+<body>
+    <div class="container ">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Welcome, {{request.session.name}}!</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="active">
+                        <a href="/logout">Logout</a>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="msg">
+                {% if messages %} {% for message in messages %} {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %} {% endfor %} {% endif %}
+            </div>
+            <h4>{{book.title}}</h4>
+            <p>Author : {{author}}</p>
+            <div class="row">
+                <div class="col-sm-6" style="background-color:rgb(189, 189, 184);">
+                    <h4>Reviews:</h4>
+                    <hr> {% if reviews %} {% for review in reviews %}
+                    <p>Rating {{review.stars}}</p>
+                    <p>
+                        <a href="/users/{{review.rater.id}}">{{review.rater.alias}}</a> says: {{review.review}}</p>
+                    <p>Posted on {{review.created_at}}</p>
+                    <br> {% endfor %} {% endif %}
+                    <hr>
+                </div>
+                <div class="col-sm-1">
+
+                </div>
+                <div class="col-sm-5" style="background-color:rgb(236, 197, 204);">
+                    <form action="/addReview/{{book.id}}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="review">Add a Review:</label>
+                            <textarea class="form-control" rows="3" name="review"></textarea>
+                        </div>
+                        <div class="form-group ">
+                            <br>
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Rating</label>
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" name="stars">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <span class="custom-control-description"> stars</span>
+                            <br>
+
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
