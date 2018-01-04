@@ -4,7 +4,7 @@ Python Django API- Book Reviews
 Django application where logged in users can view and add book reviews. 
 A user should also be able to delete his/her own reviews.
 
-I have created four models User, Author , Book with one to Many relationship with Author table, Review model has two relationship one to many with User and Book.
+I have created four models User, Author , Book with one to Many relationship with Author, Review model has two relationship one to many with User and Book.
 
 
 - Login and Registration page
