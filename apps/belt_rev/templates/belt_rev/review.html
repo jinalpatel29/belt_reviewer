@@ -16,22 +16,25 @@
 
 <body>
     <div class="container ">
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Welcome, {{request.session.name}}!</a>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active">
-                        <a href="/books">Home</a>
-                    </li>
-                    <li class="active">
-                        <a href="/logout">Logout</a>
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Welcome, {{request.session.name}}!</a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">
+                            <a href="/books">Home</a>
+                        </li>
+                        <li class="active">
+                            <a href="/logout">Logout</a>
 
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
         <div class="content">
             <div class="msg">
                 {% if messages %} {% for message in messages %} {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
@@ -45,10 +48,10 @@
                 </div>
                 {% endif %} {% endfor %} {% endif %}
             </div>
-            <h4>{{book.title}}</h4>
+            <h4 id="title">{{book.title}}</h4>
             <p>Author : {{author}}</p>
             <div class="row">
-                <div class="col-sm-6" style="background-color:rgb(189, 189, 184);">
+                <div class="col-sm-6">
                     <h4>Reviews:</h4>
                     <hr> {% if reviews %} {% for review in reviews %}
                     <p>Rating {{review.stars}}</p>
@@ -61,7 +64,7 @@
                 <div class="col-sm-1">
 
                 </div>
-                <div class="col-sm-5" style="background-color:rgb(236, 197, 204);">
+                <div class="col-sm-5">
                     <form action="/addReview/{{book.id}}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
@@ -78,16 +81,17 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <span class="custom-control-description"> stars</span>
+                            <span class="custom-control-description" style="text-decoration:none">stars</span>
                             <br>
 
                             <div class="form-group text-right">
-                                <button type="submit" class="btn btn-primary">Submit Review</button>
+                                <button type="submit" class="btn btn-danger">Submit Review</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>

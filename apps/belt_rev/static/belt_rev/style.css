@@ -1,16 +1,18 @@
-h1{
+.heading{
     text-align: center;
-    background-color: rgba(223, 223, 233, 0.801);
-    padding: 10px;
+    background-color: rgba(143, 143, 148, 0.972);
+    padding: 20px;
+}
+.main{
+    background: linear-gradient(gray, white);
 }
 .container{
     margin: 0 auto;
-    /* max-width: 700px; */
 }
 .register{
     display: inline-block;
     margin: 5px;
-    width: 400px;
+    width: 500px;
 }
 .login{
     display: inline-block;
@@ -22,7 +24,6 @@ h1{
 .right{
     width: 350px;
     height: 250px;
-    overflow: scroll;
     margin: 0;
 }
 span{
@@ -31,4 +32,21 @@ span{
 }
 hr{
     border: 1px solid black;
+}
+.books{
+    background: linear-gradient(gray, white);
+}
+
+.content{
+    background: linear-gradient(gray, white);
+    padding: 10px;
+}
+
+#title{
+    color: black;
+}
+
+.profile{
+    background: linear-gradient(gray,white );
+    padding: 10px;
 }

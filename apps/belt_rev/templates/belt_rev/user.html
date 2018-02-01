@@ -12,39 +12,41 @@
 
 <body>
     <div class="container my-3">
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Welcome, {{request.session.name}}!</a>
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Welcome, {{request.session.name}}!</a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">
+                            <a href="/books">Home</a>
+                        </li>
+                        <li class="active">
+                            <a href="/books/add">Add Book and Review</a>
+                        </li>
+                        <li class="active">
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active">
-                        <a href="/books">Home</a>
-                    </li>
-                    <li class="active">
-                        <a href="/books/add">Add Book and Review</a>
-                    </li>
-                    <li class="active">
-                        <a href="/logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="info">           
-           <p> User Alias : {{user.alias}} </p>
-           <p>Name : {{user.name}} </p>
-           <p>Email : {{user.email_id}} </p>
-           <p>Total Reviews : {{total}} </p>
+            </nav>
         </div>
-        <div>
-            <P>Posted Reviews on the following books:</P>
-            {%if reviews%}
-            {%for review in reviews%}
-            <a href="/books/{{review.reviewed_book.id}}">
-                <span>{{review.reviewed_book.title}}</span>
-            </a><br>
-            {%endfor%}
-            {%endif%}
+        <div class="row profile">
+            <div class="info">
+                <p>User Alias : {{user.alias}} </p>
+                <p>Name : {{user.name}} </p>
+                <p>Email : {{user.email_id}} </p>
+                <p>Total Reviews : {{total}} </p>
+            </div>
+            <div class="info">
+                <P>Posted Reviews on the following books:</P>
+                {%if reviews%} {%for review in reviews%}
+                <a href="/books/{{review.reviewed_book.id}}">
+                    <span>{{review.reviewed_book.title}}</span>
+                </a>
+                <br> {%endfor%} {%endif%}
+            </div>
         </div>
     </div>
 </body>
